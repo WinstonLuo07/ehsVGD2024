@@ -22,6 +22,7 @@ public class PlayerLooting : MonoBehaviour
             value += c.GetComponent<LootValues>().value;
             c.gameObject.SetActive(false);
             inventoryText.text = "Value: " + value;
+            c.GetComponent<LootValues>().updateInventory();
         }
     }
 }

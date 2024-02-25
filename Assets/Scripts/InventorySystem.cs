@@ -5,9 +5,15 @@ using UnityEngine;
 
 public class InventorySystem : MonoBehaviour
 {
+    public GameObject display;
     public float cooldownSeconds = 1f;
     private bool state = false;
     private bool cooldown = false;
+
+    private void Start()
+    {
+        display.SetActive(false);
+    }
 
     private void Update() 
     {
@@ -15,19 +21,22 @@ public class InventorySystem : MonoBehaviour
         {
             if(state) {
                 // Open
-                GetComponent<Canvas>().enabled = true;
+                display.SetActive(true);
             } else {
                 // Close
-                GetComponent<Canvas>().enabled = false;
+                display.SetActive(false);
             }
             state = !state;
             StartCoroutine(Cooldown());
         }
     }
 
+
+
     public IEnumerator Cooldown() {
         cooldown = true;
         yield return new WaitForSeconds(cooldownSeconds);
         cooldown = false;
     }
+
 }
