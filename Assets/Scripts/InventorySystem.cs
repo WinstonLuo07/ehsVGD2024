@@ -15,10 +15,8 @@ public class InventorySystem : MonoBehaviour
         display.SetActive(false);
     }
 
-    private void Update() 
-    {
-        if(Input.GetAxisRaw("Inventory") > 0 && !cooldown) 
-        {
+    private void Update() {
+        if(Input.GetAxisRaw("Inventory") > 0 && !cooldown) {
             if(state) {
                 // Open
                 display.SetActive(true);
@@ -30,8 +28,6 @@ public class InventorySystem : MonoBehaviour
             StartCoroutine(Cooldown());
         }
     }
-
-
 
     public IEnumerator Cooldown() {
         cooldown = true;

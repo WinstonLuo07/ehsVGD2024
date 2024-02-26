@@ -10,13 +10,11 @@ public class PlayerLooting : MonoBehaviour
     public TextMeshProUGUI inventoryText;
     [HideInInspector] public int value; // Value player has
 
-    private void Start()
-    {
+    private void Start() {
         inventoryText.text = "Value: 0";
     }
 
-    private void OnTriggerEnter2D(Collider2D c)
-    {
+    private void OnTriggerEnter2D(Collider2D c) {
         if(c.gameObject.CompareTag("Loot")) {
             // Loot
             value += c.GetComponent<LootValues>().value;
