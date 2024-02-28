@@ -34,7 +34,6 @@ public class ChasingHostile : MonoBehaviour
             StartCoroutine(CoolDown());
         }
         if(c.CompareTag("StationaryEnemy")) {
-            Debug.Log("HIT");
             ChangeHealth(c.GetComponent<StationaryHostile>().damage*-1f);
         }
     }

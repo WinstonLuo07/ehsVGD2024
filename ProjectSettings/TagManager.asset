@@ -7,11 +7,12 @@ TagManager:
   - Loot
   - ChaseEnemy
   - StationaryEnemy
+  - Shield
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ignore Collision
   - Water
   - UI
   - 
