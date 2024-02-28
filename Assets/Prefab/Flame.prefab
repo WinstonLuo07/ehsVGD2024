@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 1370497323326539079}
   - component: {fileID: 8103000464960649397}
   - component: {fileID: -5439066591856441496}
-  - component: {fileID: -8879655267307704086}
+  - component: {fileID: 5919592463367118189}
+  - component: {fileID: 3312374415670279672}
   m_Layer: 3
-  m_Name: Root
+  m_Name: Flame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7411047528575563452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.64, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.5283019, g: 0.3598798, b: 0.26165894, a: 1}
+  m_Color: {r: 1, g: 0.4899417, b: 0.19339621, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,9 +101,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  lifeTime: 1
-  maxDistance: 5
-  damage: 2
+  lifeTime: 1.5
+  maxDistance: 4
+  damage: 0.5
 --- !u!61 &-5439066591856441496
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -113,7 +114,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.009785354, y: 0.15121233}
@@ -129,7 +130,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9189937, y: 0.93486905}
   m_EdgeRadius: 0
---- !u!96 &-8879655267307704086
+--- !u!96 &5919592463367118189
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -171,7 +172,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.25
+  m_Time: 1.5
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -201,8 +202,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.5294118, g: 0.36078432, b: 0.25882354, a: 1}
-      key1: {r: 0.4339623, g: 0.29491517, b: 0.21084018, a: 1}
+      key0: {r: 0.9960785, g: 0.4901961, b: 0.18823531, a: 1}
+      key1: {r: 0.8962264, g: 0.3775016, b: 0.28324133, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -237,3 +238,15 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 1
   m_Emitting: 1
+--- !u!114 &3312374415670279672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7411047528575563452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ddff07bdc4f4b645aa7928444db5d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

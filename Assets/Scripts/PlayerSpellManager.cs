@@ -17,6 +17,8 @@ public class PlayerSpellManager : MonoBehaviour
 
     public GameObject rootInfectionProjectile;
     public GameObject shield;
+    public GameObject flameThrowerProjectile;
+    public GameObject mollyProjectile;
 
     private void Update() {
         if(Input.GetAxisRaw("Fire3") > 0 && !locked[2]) { // Spell 3
@@ -38,6 +40,8 @@ public class PlayerSpellManager : MonoBehaviour
             case Spells.healE: Heal(); break;
             case Spells.rootInfectionE: RootInfection(); break;
             case Spells.shieldE: Shield(); break;
+            case Spells.flameThrowerF: FlameThrower(); break;
+            case Spells.mollyF: Molly(); break;
             default: return;
         }
     }
@@ -54,6 +58,18 @@ public class PlayerSpellManager : MonoBehaviour
         Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Instantiate(rootInfectionProjectile, transform.position + new Vector3(0.25f, 0.5f, 0f), Quaternion.Euler(0f, 0f, rotZ-90));
+    }
+
+    private void FlameThrower() {
+        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Instantiate(flameThrowerProjectile, transform.position + new Vector3(0.25f, 0.5f, 0f), Quaternion.Euler(0f, 0f, rotZ-90));
+    }
+
+    private void Molly() {
+        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Instantiate(mollyProjectile, transform.position + new Vector3(0.25f, 0.5f, 0f), Quaternion.Euler(0f, 0f, rotZ-90));
     }
 
     private void Shield() {
