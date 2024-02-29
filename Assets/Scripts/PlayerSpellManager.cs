@@ -7,6 +7,7 @@ using UnityEngine.Analytics;
 public class PlayerSpellManager : MonoBehaviour
 {
     [HideInInspector] public enum Spells { 
+        dashA,
         flameThrowerF, mollyF, 
         hurricaneW,
         shieldE, healE, rootInfectionE
@@ -19,6 +20,9 @@ public class PlayerSpellManager : MonoBehaviour
     public GameObject shield;
     public GameObject flameThrowerProjectile;
     public GameObject mollyProjectile;
+    public GameObject hurricaine;
+    public float dashPower = 8f;
+    public float dashTime;
 
     private void Update() {
         if(Input.GetAxisRaw("Fire3") > 0 && !locked[2]) { // Spell 3
@@ -42,6 +46,8 @@ public class PlayerSpellManager : MonoBehaviour
             case Spells.shieldE: Shield(); break;
             case Spells.flameThrowerF: FlameThrower(); break;
             case Spells.mollyF: Molly(); break;
+            case Spells.dashA: Dash(); break;
+            case Spells.hurricaneW: Hurricaine(); break;
             default: return;
         }
     }
@@ -71,6 +77,31 @@ public class PlayerSpellManager : MonoBehaviour
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Instantiate(mollyProjectile, transform.position + new Vector3(0.25f, 0.5f, 0f), Quaternion.Euler(0f, 0f, rotZ-90));
     }
+    
+    private float playerSpeed = 5f;
+    private void Dash() {
+        playerSpeed = GetComponent<PlayerMovement>().moveSpeed;
+        GetComponent<PlayerMovement>().moveSpeed = dashPower;
+        Invoke("ResetSpeed", dashTime);
+    }
+
+    private void Hurricaine() {
+        StartCoroutine(staggerHurricaine());
+    }
+
+    IEnumerator staggerHurricaine() {
+        SpawnHurricaine(2f, 0.5f);
+        yield return new WaitForSeconds(0.25f);
+        SpawnHurricaine(2.5f, 0.4f);
+        yield return new WaitForSeconds(0.25f);
+        SpawnHurricaine(3f, .3f);
+    }
+
+    private void SpawnHurricaine(float distance, float degrees) {
+        GameObject h = Instantiate(hurricaine, new Vector2(transform.position.x + distance, transform.position.y), transform.rotation);
+        h.GetComponent<HurricaineManager>().player = gameObject;
+        h.GetComponent<HurricaineManager>().degrees = degrees;
+    }
 
     private void Shield() {
         GameObject s = Instantiate(shield, transform.position, transform.rotation);
@@ -82,20 +113,22 @@ public class PlayerSpellManager : MonoBehaviour
     // Get string friendly name of spells
     public String getSpell(Spells s) {
         switch(s) {
-        case Spells.flameThrowerF:
-            return "Flame Thrower";
-        case Spells.mollyF:
-            return "Flame Molly";
-        case Spells.hurricaneW:
-            return "Hurricane";
-        case Spells.shieldE:
-            return "Shield";
-        case Spells.healE:
-            return "Heal";
-        case Spells.rootInfectionE:
-            return "Root Infection";
-        default:
-            return s.ToString();
+            case Spells.dashA:
+                return "Dash";
+            case Spells.flameThrowerF:
+                return "Flame Thrower";
+            case Spells.mollyF:
+                return "Flame Molly";
+            case Spells.hurricaneW:
+                return "Hurricane";
+            case Spells.shieldE:
+                return "Shield";
+            case Spells.healE:
+                return "Heal";
+            case Spells.rootInfectionE:
+                return "Root Infection";
+            default:
+                return s.ToString();
         }
     }
 
@@ -103,5 +136,9 @@ public class PlayerSpellManager : MonoBehaviour
         locked[index] = true;
         yield return new WaitForSeconds(cooldown[index]);
         locked[index] = false;
+    }
+
+    private void ResetSpeed() {
+        GetComponent<PlayerMovement>().moveSpeed = playerSpeed;
     }
 }
