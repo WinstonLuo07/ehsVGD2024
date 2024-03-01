@@ -9,6 +9,7 @@ public class PlayerHealthManager : MonoBehaviour
     public float healthPoints = 20.0f;
     public RectTransform healthBar;
     public TextMeshProUGUI healthText;
+    public AudioSource source;
 
     public void UpdateHealthBar() {
         // Check death
@@ -25,12 +26,14 @@ public class PlayerHealthManager : MonoBehaviour
 
         // Update Text
         healthText.text = Mathf.Floor(healthPoints) + "/20";
+        source.enabled = false;
     }
 
     public void ChangeHealth(float v) {
         healthPoints += v;
         UpdateHealthBar();
+        source.enabled = true;
     }
 
-    private void Start() { UpdateHealthBar(); }
+    private void Start() { UpdateHealthBar(); source.enabled = false; }
 }

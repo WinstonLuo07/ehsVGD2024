@@ -8,9 +8,12 @@ using TMPro;
 public class PlayerLooting : MonoBehaviour
 {
     public TextMeshProUGUI inventoryText;
+    public AudioSource source;
     [HideInInspector] public int value; // Value player has
+    [HideInInspector] public int cash; // Cash player has
 
     private void Start() {
+        source.enabled = false;
         inventoryText.text = "Value: 0";
     }
 
@@ -21,6 +24,13 @@ public class PlayerLooting : MonoBehaviour
             c.gameObject.SetActive(false);
             inventoryText.text = "Value: " + value;
             c.GetComponent<LootValues>().updateInventory();
+            source.enabled = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D c) {
+        if(c.CompareTag("Loot")) {
+            source.enabled = false;
         }
     }
 

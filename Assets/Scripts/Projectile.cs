@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
 {
     public float speed = 4f;
     public float lifeTime;
-    public float maxDistance = 5f;
+    public float maxDistance = 2f;
     public float damage = 2f;
     private Vector2 target;
 

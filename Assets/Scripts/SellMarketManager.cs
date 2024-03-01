@@ -10,6 +10,8 @@ public class SellMarketManager : MonoBehaviour
     public TextMeshProUGUI notification;
     public TextMeshProUGUI[] lootValues;
     private int cashValue;
+    public float cooldown = 0.25f;
+    public bool locked = false;
 
     private void Start() {
         notificationObject.SetActive(false);
@@ -19,8 +21,10 @@ public class SellMarketManager : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D c) {
-        if(c.CompareTag("Player") && Input.GetAxisRaw("Interact") > 0) {
+        if(!locked && c.CompareTag("Player") && Input.GetAxisRaw("Interact") > 0) {
+            StartCoroutine(CoolDown());
             int v = c.GetComponent<PlayerLooting>().value;
+            notification.text = "+$" + v;
             cashValue += v;
 
             c.GetComponent<PlayerLooting>().ChangeValue(0);
@@ -30,7 +34,7 @@ public class SellMarketManager : MonoBehaviour
             }
 
             cash.text = "$" + cashValue;
-            notification.text = "+" + v;
+            c.GetComponent<PlayerLooting>().cash = cashValue;
             StartCoroutine(PlayNotification());
         }
     }
@@ -39,5 +43,11 @@ public class SellMarketManager : MonoBehaviour
         notificationObject.SetActive(true);
         yield return new WaitForSeconds(1);
         notificationObject.SetActive(false);
+    }
+
+    IEnumerator CoolDown() {
+        locked = true;
+        yield return new WaitForSeconds(cooldown);
+        locked = false;
     }
 }
