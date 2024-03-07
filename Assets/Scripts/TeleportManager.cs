@@ -10,6 +10,7 @@ public class TeleportManager : MonoBehaviour
     public LevelManagementSystem lvl;
     public bool exitCave;
 
+
     private void OnTriggerEnter2D(Collider2D c) {
         if(c.CompareTag("Player")) {
             c.gameObject.transform.position = teleportTo.transform.position;

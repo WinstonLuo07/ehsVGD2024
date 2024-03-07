@@ -13,6 +13,9 @@ public class LevelManagementSystem : MonoBehaviour
     private bool sellTutorial = false;
     private bool buyTutorial = false;
 
+    public AudioSource market;
+    public AudioSource cave;
+
     [Header("Levels")]
     public GameObject level0Spawn;
     public GameObject level1Spawn;
@@ -56,6 +59,7 @@ public class LevelManagementSystem : MonoBehaviour
     
     private void OnTriggerEnter2D() {
         // SEND TO CAVES !!!
+        
         switch(level){
             case 0: player.transform.position = level0Spawn.transform.position; 
                     StartCoroutine(SetText("Objective: Make your way to the exit. Beware of staligmites!", 0f));

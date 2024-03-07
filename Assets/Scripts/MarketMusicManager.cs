@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class MarketMusicManager : MonoBehaviour
 {
-    private AudioSource source;
-
+    public AudioSource market;
+    public AudioSource cave;
+    /*
     private void Start() {
         source = GetComponent<AudioSource>();
         source.enabled = false;
@@ -20,6 +21,35 @@ public class MarketMusicManager : MonoBehaviour
     private void OnTriggerExit2D(Collider2D c) {
         if(c.CompareTag("Player")) {
             source.enabled = false;
+        }
+    }*/
+    private void Update()
+    {
+        float level = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManagementSystem>().level;
+
+        if (level == 0)
+        {
+            if (market)
+            {
+                market.enabled = true;
+            }
+            if (cave)
+            {
+                cave.enabled = false;
+            }
+            
+        }
+
+        else if (level > 0)
+        {
+            if (market)
+            {
+                market.enabled = false;
+            }
+            if (cave)
+            {
+                cave.enabled = true;
+            }
         }
     }
 }

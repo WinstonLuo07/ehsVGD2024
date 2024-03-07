@@ -8,6 +8,7 @@ TagManager:
   - ChaseEnemy
   - StationaryEnemy
   - Shield
+  - LevelManager
   layers:
   - Default
   - TransparentFX
