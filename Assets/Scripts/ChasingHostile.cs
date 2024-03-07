@@ -11,6 +11,7 @@ public class ChasingHostile : MonoBehaviour
     private float d; // Distance
     private bool cooldown = false;
     private Vector2 wayPoint;
+    public GameObject[] range;
     
     private void Start() {
         SetNewDestination();
@@ -45,7 +46,8 @@ public class ChasingHostile : MonoBehaviour
     }
 
     private void SetNewDestination() {
-        wayPoint = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f));
+        wayPoint = new Vector2(Random.Range(range[0].transform.position.x, range[1].transform.position.x),
+        Random.Range(range[0].transform.position.y, range[1].transform.position.y));
     }
 
     public float ChangeHealth(float v) {
